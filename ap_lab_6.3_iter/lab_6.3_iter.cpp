@@ -8,6 +8,7 @@ void Create(int* a, const int size, const int Low, const int High) {
         a[i] = Low + rand() % (High - Low + 1);
 }
 
+
 void Print(int* a, const int size) {
     for (int i = 0; i < size; i++)
         cout << "a[" << setw(2) << i << " ] = " << setw(4) << a[i] << endl;
@@ -28,11 +29,11 @@ int MinOdd(int* a, const int size) {
     }
 
     if (imin == -1) {
-        cerr << "There`s no odd elements" << endl;
+        cerr << "There are no odd elements" << endl;
         return 0;
     }
 
-    // Пошук мінімального серед непарних
+    // пошук мінімального серед непарних
     for (int i = imin + 1; i < size; i++) {
         if (a[i] % 2 != 0 && a[i] < minOdd) {
             minOdd = a[i];
@@ -41,6 +42,34 @@ int MinOdd(int* a, const int size) {
 
     return minOdd;
 }
+
+template <typename T>
+T MinOddTemplate(T* a, const int size) {
+    T minOdd;
+    int imin = -1;
+
+    for (int i = 0; i < size; i++) {
+        if (a[i] % 2 != 0) {
+            minOdd = a[i];
+            imin = i;
+            break;
+        }
+    }
+
+    if (imin == -1) {
+        cerr << "There are no odd elements" << endl;
+        return 0;
+    }
+
+    for (int i = imin + 1; i < size; i++) {
+        if (a[i] % 2 != 0 && a[i] < minOdd) {
+            minOdd = a[i];
+        }
+    }
+
+    return minOdd;
+}
+
 
 int main() {
     srand((unsigned)time(NULL));
@@ -54,7 +83,13 @@ int main() {
     Create(a, n, Low, High);
     Print(a, n);
 
-    cout << "minOdd = " << MinOdd(a, n) << endl;
+    int result = MinOdd(a, n);
+
+    if (result == 0) {
+        cout << "Using template function..." << endl;
+        result = MinOddTemplate(a, n);
+    }
+    cout << "MinOdd = " << result << endl;
 
     return 0;
 }

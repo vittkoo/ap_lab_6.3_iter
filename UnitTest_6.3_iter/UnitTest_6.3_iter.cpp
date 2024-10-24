@@ -23,6 +23,14 @@ namespace UnitTestForArray
 			}
 		}
 
+		TEST_METHOD(TestPrintArray)
+		{
+			const int n = 5;
+			int a[n] = { 1, 2, 3, 4, 5 };
+			Print(a, n);
+		}
+
+
 		TEST_METHOD(TestMinOdd)
 		{
 			// 1. масив з непарними елементами
@@ -48,6 +56,17 @@ namespace UnitTestForArray
 
 			int actualMinOdd3 = MinOdd(a3, n3);
 			Assert::AreEqual(expectedMinOdd3, actualMinOdd3);
+		}
+
+
+		TEST_METHOD(TestTemplateMinOdd)
+		{
+			const int n = 5;
+			int a[n] = { 13, 24, 5, 8, 7 };
+			int expectedMinOdd = 5;
+
+			int actualMinOdd = MinOdd(a, n);
+			Assert::AreEqual(expectedMinOdd, actualMinOdd);
 		}
 	};
 }
